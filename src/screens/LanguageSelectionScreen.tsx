@@ -36,11 +36,18 @@ export const LanguageSelectionScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <ScreenContainer
       testID="language-selection-screen"
+      scrollable
       contentStyle={[
         styles.content,
         isLandscapeMode && styles.contentLandscape,
+        (isLandscapeMode || isTabletDevice) && styles.contentCompact,
       ]}>
-      <View style={[styles.main, isTabletDevice && styles.mainTablet]}>
+      <View
+        style={[
+          styles.main,
+          isTabletDevice && styles.mainTablet,
+          (isLandscapeMode || isTabletDevice) && styles.mainLandscape,
+        ]}>
         <View style={styles.header}>
           <Typography variant="title">{t('languageSelection.title')}</Typography>
           <Spacer size="sm" />
@@ -49,17 +56,27 @@ export const LanguageSelectionScreen: React.FC<Props> = ({ navigation }) => {
           </Typography>
         </View>
 
-        <Spacer size="xl" />
+        <Spacer size={isLandscapeMode ? 'md' : 'xl'} />
 
-        <View style={styles.options}>
+        <View
+          style={[
+            styles.options,
+            (isLandscapeMode || isTabletDevice) && styles.optionsRow,
+          ]}>
           {LANGUAGE_OPTIONS.map(option => (
-            <LanguageOptionCard
+            <View
               key={option.id}
-              testID={`language-option-${option.id}`}
-              label={t(option.labelKey)}
-              selected={selectedLanguage === option.id}
-              onPress={() => setSelectedLanguage(option.id)}
-            />
+              style={[
+                styles.optionItem,
+                (isLandscapeMode || isTabletDevice) && styles.optionItemRow,
+              ]}>
+              <LanguageOptionCard
+                testID={`language-option-${option.id}`}
+                label={t(option.labelKey)}
+                selected={selectedLanguage === option.id}
+                onPress={() => setSelectedLanguage(option.id)}
+              />
+            </View>
           ))}
         </View>
       </View>
@@ -84,10 +101,16 @@ const styles = StyleSheet.create({
   contentLandscape: {
     paddingTop: spacing.lg,
   },
+  contentCompact: {
+    paddingBottom: spacing.md,
+  },
   main: {
     flex: 1,
   },
   mainTablet: {
+    justifyContent: 'center',
+  },
+  mainLandscape: {
     justifyContent: 'center',
   },
   header: {
@@ -95,6 +118,17 @@ const styles = StyleSheet.create({
   },
   options: {
     width: '100%',
+  },
+  optionsRow: {
+    flexDirection: 'row',
+    gap: spacing.md,
+  },
+  optionItem: {
+    width: '100%',
+  },
+  optionItemRow: {
+    flex: 1,
+    width: undefined,
   },
   footer: {
     width: '100%',

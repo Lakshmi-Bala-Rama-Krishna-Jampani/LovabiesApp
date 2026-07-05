@@ -21,7 +21,7 @@ type Props = NativeStackScreenProps<RootStackParamList, typeof ROUTES.PARENTAL_G
 
 export const ParentalGateScreen: React.FC<Props> = ({ navigation, route }) => {
   const { t } = useTranslation();
-  const { isTabletDevice } = useResponsive();
+  const { isTabletDevice, isLandscapeMode } = useResponsive();
   const {
     question,
     answerInput,
@@ -72,8 +72,13 @@ export const ParentalGateScreen: React.FC<Props> = ({ navigation, route }) => {
   return (
     <ScreenContainer
       testID="parental-gate-screen"
+      scrollable
       centered
-      contentStyle={[styles.content, isTabletDevice && styles.contentTablet]}>
+      contentStyle={[
+        styles.content,
+        isLandscapeMode && styles.contentLandscape,
+        isTabletDevice && styles.contentTablet,
+      ]}>
       <Typography variant="title" align="center">
         {t('parentalGate.title')}
       </Typography>
@@ -91,7 +96,7 @@ export const ParentalGateScreen: React.FC<Props> = ({ navigation, route }) => {
         </>
       ) : null}
 
-      <Spacer size="xxl" />
+      <Spacer size={isLandscapeMode ? 'lg' : 'xxl'} />
 
       <Typography
         variant="equation"
@@ -101,7 +106,7 @@ export const ParentalGateScreen: React.FC<Props> = ({ navigation, route }) => {
         {question.expression}
       </Typography>
 
-      <Spacer size="xl" />
+      <Spacer size={isLandscapeMode ? 'md' : 'xl'} />
 
       <View style={styles.form}>
         <ParentalGateInput
@@ -112,7 +117,7 @@ export const ParentalGateScreen: React.FC<Props> = ({ navigation, route }) => {
           errorMessage={errorMessage}
         />
 
-        <Spacer size="xl" />
+        <Spacer size={isLandscapeMode ? 'md' : 'xl'} />
 
         <PrimaryButton
           testID="parental-gate-submit-button"
@@ -129,6 +134,9 @@ const styles = StyleSheet.create({
   content: {
     justifyContent: 'center',
     paddingVertical: spacing.xl,
+  },
+  contentLandscape: {
+    paddingVertical: spacing.md,
   },
   contentTablet: {
     maxWidth: 520,

@@ -3,7 +3,6 @@ import { Image, ImageSourcePropType, StyleSheet, View } from 'react-native';
 
 import { useResponsive } from '../../hooks/useResponsive';
 import { colors } from '../../theme';
-import { moderateScale } from '../../utils/responsive';
 
 export interface HeroIllustrationProps {
   portraitSource: ImageSourcePropType;
@@ -16,7 +15,7 @@ export const HeroIllustration: React.FC<HeroIllustrationProps> = ({
   landscapeSource,
   testID,
 }) => {
-  const { isLandscapeMode, width } = useResponsive();
+  const { isLandscapeMode, width, heroHeight } = useResponsive();
   const source = isLandscapeMode ? landscapeSource : portraitSource;
 
   return (
@@ -26,8 +25,8 @@ export const HeroIllustration: React.FC<HeroIllustrationProps> = ({
         style={[
           styles.image,
           {
-            width: width,
-            height: isLandscapeMode ? moderateScale(180) : moderateScale(260),
+            width,
+            height: heroHeight,
           },
         ]}
         resizeMode="cover"

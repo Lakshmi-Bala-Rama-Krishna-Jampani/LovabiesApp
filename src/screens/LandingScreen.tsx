@@ -18,13 +18,12 @@ import { PLUSH_OPTIONS } from '../constants/plush';
 import { useResponsive } from '../hooks/useResponsive';
 import { RootStackParamList } from '../types/navigation';
 import { colors, layout, spacing } from '../theme';
-import { moderateScale } from '../utils/responsive';
 
 type Props = NativeStackScreenProps<RootStackParamList, typeof ROUTES.LANDING>;
 
 export const LandingScreen: React.FC<Props> = ({ navigation, route }) => {
   const { t } = useTranslation();
-  const { isLandscapeMode, isTabletDevice } = useResponsive();
+  const { isLandscapeMode, isTabletDevice, ms } = useResponsive();
 
   const selectedPlush = useMemo(() => {
     if (!route.params?.selectedPlush) {
@@ -52,14 +51,14 @@ export const LandingScreen: React.FC<Props> = ({ navigation, route }) => {
   const illustration = selectedPlush ? (
     <Image
       source={images[selectedPlush.imageKey]}
-      style={styles.selectedImage}
+      style={[styles.selectedImage, { height: ms(180) }]}
       resizeMode="contain"
       accessibilityIgnoresInvertColors
     />
   ) : (
     <Image
       source={images.heroWide}
-      style={styles.heroImage}
+      style={[styles.heroImage, { height: ms(isLandscapeMode ? 140 : 160) }]}
       resizeMode="cover"
       accessibilityIgnoresInvertColors
     />
@@ -142,13 +141,11 @@ const styles = StyleSheet.create({
   },
   selectedImage: {
     width: '100%',
-    height: moderateScale(180),
     borderRadius: 16,
     marginBottom: spacing.md,
   },
   heroImage: {
     width: '100%',
-    height: moderateScale(160),
     borderRadius: 16,
     marginBottom: spacing.md,
   },
