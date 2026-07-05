@@ -1,4 +1,6 @@
 {
+  "name": "LovabiesApp",
+  "displayName": "LovabiesApp",
   "expo": {
     "name": "LovabiesApp",
     "slug": "lovabiesapp",
