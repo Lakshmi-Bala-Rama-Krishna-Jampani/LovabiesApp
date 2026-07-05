@@ -53,7 +53,7 @@ npm run android
 npm run build:apk
 ```
 
-Output: `android/app/build/outputs/apk/debug/app-debug.apk`
+Output: `android/app/build/outputs/apk/debug/app-debug.apk` (debug — needs Metro while testing)
 
 ### Cloud build (Expo EAS)
 
@@ -63,7 +63,7 @@ eas login
 npm run build:cloud
 ```
 
-Download the APK from the terminal link or [expo.dev](https://expo.dev).
+Download the APK from the terminal link or [expo.dev](https://expo.dev). This builds a **standalone release APK** — no Metro needed on the phone.
 
 ### Release build (local, optional)
 
