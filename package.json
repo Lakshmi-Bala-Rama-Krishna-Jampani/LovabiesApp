@@ -13,6 +13,7 @@
     "typecheck": "tsc --noEmit",
     "build:apk": "cd android && gradlew.bat assembleDebug",
     "build:apk:release": "cd android && gradlew.bat assembleRelease",
+    "build:cloud": "eas build -p android --profile preview",
     "dev:phone": "adb reverse tcp:8081 tcp:8081"
   },
   "dependencies": {

@@ -47,6 +47,8 @@ npm run android
 
 ## Build Debug APK
 
+### Option A — Local build (Gradle on your machine)
+
 ```bash
 npm run build:apk
 ```
@@ -57,7 +59,14 @@ Output:
 android/app/build/outputs/apk/debug/app-debug.apk
 ```
 
-Release APK (optional):
+### Option B — Cloud build with Expo EAS (if local build fails)
+
+1. Install EAS CLI: `npm install -g eas-cli`
+2. Log in: `eas login`
+3. Build: `npm run build:cloud`
+4. Download the APK from the link in the terminal or from [expo.dev](https://expo.dev)
+
+Release APK (optional, local only):
 
 ```bash
 npm run build:apk:release
