@@ -1,4 +1,15 @@
 {
-  "name": "LovabiesApp",
-  "displayName": "LovabiesApp"
+  "expo": {
+    "name": "LovabiesApp",
+    "slug": "lovabiesapp",
+    "version": "1.0.0",
+    "android": {
+      "package": "com.lovabiesapp"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "59cf8501-bffd-4770-bd97-542fd3677c55"
+      }
+    }
+  }
 }
