@@ -13,5 +13,7 @@ describe('localization', () => {
     await i18n.changeLanguage('pl');
     expect(i18n.t('welcome.title')).toBe('Welcome!*');
     expect(i18n.t('plushSelection.next')).toBe('Next*');
+    expect(i18n.t('plushSelection.zeezeeName')).toBe('ZeeZee*');
+    expect(i18n.t('common.brandName')).toBe('Lovabies*');
   });
 });

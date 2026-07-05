@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { Alert, Image, StyleSheet, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useTranslation } from 'react-i18next';
@@ -35,8 +35,12 @@ export const LandingScreen: React.FC<Props> = ({ navigation, route }) => {
   }, [route.params?.selectedPlush]);
 
   const selectedPlushLabel = selectedPlush
-    ? t('landing.selectedPlush', { name: selectedPlush.name })
+    ? t('landing.selectedPlush', { name: t(selectedPlush.nameKey) })
     : undefined;
+
+  const handleStartExploring = useCallback(() => {
+    Alert.alert(t('landing.startExploringTitle'), t('landing.startExploringMessage'));
+  }, [t]);
 
   const navigateToLanguageSelection = useCallback(() => {
     navigation.reset({
@@ -116,7 +120,11 @@ export const LandingScreen: React.FC<Props> = ({ navigation, route }) => {
 
       <Spacer size="xl" />
 
-      <PrimaryButton label={t('landing.startExploring')} onPress={() => undefined} />
+      <PrimaryButton
+        testID="landing-start-exploring-button"
+        label={t('landing.startExploring')}
+        onPress={handleStartExploring}
+      />
       <Spacer size="md" />
       <SecondaryButton
         label={t('landing.changeLanguage')}

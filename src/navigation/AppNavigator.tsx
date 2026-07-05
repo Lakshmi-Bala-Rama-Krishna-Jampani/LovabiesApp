@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useTranslation } from 'react-i18next';
 
 import { ROUTES } from '../constants/navigation';
 import {
@@ -17,6 +18,8 @@ import { colors } from '../theme';
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const AppNavigator: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -43,22 +46,22 @@ export const AppNavigator: React.FC = () => {
         <Stack.Screen
           name={ROUTES.WELCOME}
           component={WelcomeScreen}
-          options={{ title: 'Lovabies' }}
+          options={{ title: t('common.brandName') }}
         />
         <Stack.Screen
           name={ROUTES.PLUSH_SELECTION}
           component={PlushSelectionScreen}
-          options={{ title: 'Lovabies' }}
+          options={{ title: t('common.brandName') }}
         />
         <Stack.Screen
           name={ROUTES.COMPARISON}
           component={ComparisonScreen}
-          options={{ title: 'Lovabies' }}
+          options={{ title: t('common.brandName') }}
         />
         <Stack.Screen
           name={ROUTES.PARENTAL_GATE}
           component={ParentalGateScreen}
-          options={{ title: 'Lovabies' }}
+          options={{ title: t('common.brandName') }}
         />
         <Stack.Screen
           name={ROUTES.LANDING}

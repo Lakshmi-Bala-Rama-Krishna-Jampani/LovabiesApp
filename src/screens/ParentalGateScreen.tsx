@@ -62,8 +62,12 @@ export const ParentalGateScreen: React.FC<Props> = ({ navigation, route }) => {
       return undefined;
     }
 
-    return PLUSH_OPTIONS.find(option => option.id === route.params.selectedPlush)?.name;
-  }, [route.params?.selectedPlush]);
+    const selectedOption = PLUSH_OPTIONS.find(
+      option => option.id === route.params.selectedPlush,
+    );
+
+    return selectedOption ? t(selectedOption.nameKey) : undefined;
+  }, [route.params?.selectedPlush, t]);
 
   return (
     <ScreenContainer

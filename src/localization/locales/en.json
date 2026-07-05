@@ -19,6 +19,8 @@
     "title": "Select your Lovabies",
     "subtitle": "Pick the plush you want to get for your loved one",
     "next": "Next",
+    "zeezeeName": "ZeeZee",
+    "guffyName": "Guffy",
     "zeezeeTagline": "The Smart Storyteller",
     "guffyTagline": "Smart Interactive Bear"
   },
@@ -61,9 +63,12 @@
     "settingsTitle": "Customize experience",
     "settingsDescription": "Change language, manage parental controls, and update content anytime.",
     "startExploring": "Start exploring",
+    "startExploringTitle": "Adventure awaits",
+    "startExploringMessage": "Browse stories, songs, and rhymes curated for little listeners.",
     "changeLanguage": "Change language"
   },
   "common": {
-    "back": "Go back"
+    "back": "Go back",
+    "brandName": "Lovabies"
   }
 }
