@@ -1,6 +1,6 @@
 # Lovabies App
 
-React Native onboarding app for the Lovabies assignment.
+React Native onboarding app with language selection, plush flow, parental gate, and landing screen.
 
 ## App Flow
 
@@ -45,54 +45,55 @@ Terminal 2:
 npm run android
 ```
 
-## Build Debug APK
+## Build APK
 
-### Option A — Local build (Gradle on your machine)
+### Local build
 
 ```bash
 npm run build:apk
 ```
 
-Output:
+Output: `android/app/build/outputs/apk/debug/app-debug.apk`
 
+### Cloud build (Expo EAS)
+
+```bash
+npm install -g eas-cli
+eas login
+npm run build:cloud
 ```
-android/app/build/outputs/apk/debug/app-debug.apk
-```
 
-### Option B — Cloud build with Expo EAS (if local build fails)
+Download the APK from the terminal link or [expo.dev](https://expo.dev).
 
-1. Install EAS CLI: `npm install -g eas-cli`
-2. Log in: `eas login`
-3. Build: `npm run build:cloud`
-4. Download the APK from the link in the terminal or from [expo.dev](https://expo.dev)
-
-Release APK (optional, local only):
+### Release build (local, optional)
 
 ```bash
 npm run build:apk:release
 ```
 
+Output: `android/app/build/outputs/apk/release/app-release.apk`
+
 ## Project Structure
 
 ```
 src/
-├── assets/images/       # App images
-├── components/common/   # Reusable UI components
-├── constants/           # Routes, plush options, feature data
-├── hooks/               # Responsive layout, parental gate
-├── localization/        # i18n config + en.json / pl.json
-├── navigation/          # App navigator
-├── screens/             # Screen components
-├── theme/               # Colors, spacing, typography
-├── types/               # Shared TypeScript types
-└── utils/               # Helpers
+├── assets/images/
+├── components/common/
+├── constants/
+├── hooks/
+├── localization/
+├── navigation/
+├── screens/
+├── theme/
+├── types/
+└── utils/
 ```
 
 ## Localization
 
-- Strings: `src/localization/locales/en.json`, `pl.json`
-- Screens use `useTranslation()` — no hardcoded UI copy
-- Polski uses an i18next post-processor to append `*`
+- Resource files: `src/localization/locales/en.json`, `pl.json`
+- Screens use `useTranslation()` for all UI copy
+- Polski locale appends `*` via an i18next post-processor
 
 ## Testing
 
@@ -100,15 +101,3 @@ src/
 npm test
 npm run typecheck
 ```
-
-## Submission ZIP
-
-```
-[YourName]_Assignment.zip
-├── LovabiesApp/          # Full source code
-├── app-debug.apk         # Built APK
-├── README.md
-└── demo-recording.mp4    # Screen recording
-```
-
-Replace `[YourName]` with your name before submitting.
