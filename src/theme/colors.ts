@@ -21,8 +21,6 @@ export const colors = {
   errorBackground: '#DC2626',
   divider: 'rgba(255, 255, 255, 0.2)',
   overlay: 'rgba(0, 0, 0, 0.35)',
-  zeezeeCard: '#FF6B9D',
-  guffyCard: '#F5C518',
   landingAccent: '#FFE066',
   transparent: 'transparent',
 } as const;
