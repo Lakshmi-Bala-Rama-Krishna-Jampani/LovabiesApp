@@ -1,97 +1,156 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Lovabies App
 
-# Getting Started
+Production-oriented React Native assignment implementing the Lovabies onboarding flow with responsive UI, localization, typed navigation, and reusable components.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Overview
 
-## Step 1: Start Metro
+The app guides users through:
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+1. **Language Selection** — English or Polski (Polish appends `*` to all localized strings)
+2. **Welcome** — choose whether they own a Lovabies toy
+3. **Plush Selection** — if they have a toy (ZeeZee or Guffy)
+4. **Comparison / Benefits** — if they do not have a toy yet
+5. **Parental Gate** — randomized math challenge before purchase-related actions
+6. **Landing** — personalized home screen
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+## Tech Stack
 
-```sh
-# Using npm
+- React Native 0.86 (CLI)
+- TypeScript
+- React Navigation (native stack)
+- i18next + react-i18next
+- react-native-safe-area-context
+- react-native-gesture-handler
+- react-native-screens
+- react-native-vector-icons
+
+## Architecture
+
+```
+src/
+├── assets/images/          # Bundled PNG assets
+├── components/common/      # Reusable UI kit
+├── config/                 # Static config (asset registry)
+├── constants/              # Route names, feature data, plush options
+├── hooks/                  # Responsive + parental gate logic
+├── localization/           # i18n setup + locale JSON files
+├── navigation/             # App navigator
+├── screens/                # Feature screens
+├── theme/                  # Design tokens (colors, spacing, typography)
+├── types/                  # Shared TypeScript types
+└── utils/                  # Responsive scaling + parental gate helpers
+```
+
+See [ARCHITECTURE.md](./ARCHITECTURE.md) and [INTERVIEW.md](./INTERVIEW.md) for deeper design notes.
+
+## Prerequisites
+
+- Node.js >= 22.11
+- JDK 17+
+- Android Studio with SDK 36 (Android 16 target)
+- Android emulator or physical device
+
+## Installation
+
+```bash
+cd LovabiesApp
+npm install
+```
+
+## Run on Android
+
+Start Metro:
+
+```bash
 npm start
-
-# OR using Yarn
-yarn start
 ```
 
-## Step 2: Build and run your app
+In a second terminal:
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
+```bash
 npm run android
-
-# OR using Yarn
-yarn android
 ```
 
-### iOS
+## Build Release APK
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
+```bash
+cd android
+./gradlew assembleRelease
 ```
 
-Then, and every time you update your native dependencies, run:
+Windows:
 
-```sh
-bundle exec pod install
+```powershell
+cd android
+.\gradlew.bat assembleRelease
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+APK output:
 
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
+```
+android/app/build/outputs/apk/release/app-release.apk
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+## Localization
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+- Resource files: `src/localization/locales/en.json`, `pl.json`
+- All UI strings use `useTranslation()` — no hardcoded copy in screens
+- Selecting **Polski** activates an i18next post-processor that appends `*` to every translated string
 
-## Step 3: Modify your app
+Example:
 
-Now that you have successfully run the app, let's make changes!
+```ts
+await i18n.changeLanguage('pl');
+t('welcome.title'); // "Welcome!*"
+```
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+## Responsiveness
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+- `useWindowDimensions()` via `useResponsive()` hook
+- Scaling helpers: `scale`, `verticalScale`, `moderateScale`
+- Tablet detection (shortest side >= 600dp)
+- Landscape-aware layouts (side-by-side cards, wider hero images)
+- Content max-width constraints for large screens
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+## Testing
 
-## Congratulations! :tada:
+```bash
+npm test
+```
 
-You've successfully run and modified your React Native App. :partying_face:
+Covers localization post-processing, parental gate utilities, and core component rendering.
 
-### Now what?
+## Screen Recording Checklist
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+See [SCREEN_RECORDING_CHECKLIST.md](./SCREEN_RECORDING_CHECKLIST.md).
 
-# Troubleshooting
+## Tradeoffs
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+| Decision | Rationale |
+|----------|-----------|
+| Native Stack Navigator | Simple flow, native performance, built-in back handling |
+| i18next post-processor for `*` | Keeps one set of base strings; demonstrates locale switching without duplicating copy |
+| Centralized theme tokens | Consistent purple brand UI and easier design updates |
+| Randomized parental gate | Prevents memorization; resets after failed attempts |
+| Secondary CTA skips gate | "Maybe later" implies exploration without purchase friction |
 
-# Learn More
+## Future Improvements
 
-To learn more about React Native, take a look at the following resources:
+- Persist language preference with AsyncStorage
+- Add real Polish translations instead of English + `*`
+- Dark mode theme variant (tokens already centralized)
+- Detox E2E tests for full navigation flow
+- Animated screen transitions with Reanimated shared elements
+- Accessibility audit with TalkBack on physical device
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+## Submission ZIP Contents
+
+```
+[YourName_Assignment.zip]
+├── LovabiesApp/                 # Full source
+├── app-release.apk              # Release APK
+├── README.md                    # This file
+└── demo-recording.mp4           # Screen recording
+```
+
+Replace `[YourName]` with your name before submitting.

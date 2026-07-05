@@ -1,0 +1,69 @@
+{
+  "languageSelection": {
+    "title": "Select a language",
+    "subtitle": "You can always change this later in the settings.",
+    "confirm": "Confirm"
+  },
+  "languages": {
+    "english": "English",
+    "polish": "Polski"
+  },
+  "welcome": {
+    "title": "Welcome!",
+    "subtitleLine1": "Stories songs and adventures await.",
+    "subtitleLine2": "Do you have a Lovabies toy?",
+    "hasToy": "Yes, I have my toy!",
+    "noToy": "No, I don't have one yet!"
+  },
+  "plushSelection": {
+    "title": "Select your Lovabies",
+    "subtitle": "Pick the plush you want to get for your loved one",
+    "next": "Next",
+    "zeezeeTagline": "The Smart Storyteller",
+    "guffyTagline": "Smart Interactive Bear"
+  },
+  "comparison": {
+    "title": "Stories that hug back!",
+    "subtitle": "Every story & song, now in a huggable, screen-free friend.",
+    "appOnly": "App only",
+    "appPlusPlush": "App + Plush",
+    "primaryCta": "Bring a buddy home!",
+    "secondaryCta": "Maybe later - keep exploring",
+    "features": {
+      "listenOnPhone": "Listen on phone",
+      "basicStories": "Basic stories & rhymes",
+      "hugAndListen": "Hug & listen anywhere",
+      "offlinePlayback": "Offline playback",
+      "physicalButtons": "Physical buttons",
+      "fullLibrary": "Access to full library",
+      "recordVoice": "Record your own voice",
+      "sleepTimer": "Sleep timer",
+      "contentUpdates": "Content updates"
+    }
+  },
+  "parentalGate": {
+    "title": "Parental Lock",
+    "subtitle": "Solve the following equation to continue",
+    "placeholder": "Type here...",
+    "next": "Next",
+    "errorInvalid": "Please enter a valid number",
+    "errorIncorrect": "Incorrect answer. Please try again.",
+    "attemptsExceeded": "Too many attempts. A new question has been generated."
+  },
+  "landing": {
+    "title": "You're all set!",
+    "subtitle": "Your Lovabies adventure begins now.",
+    "selectedPlush": "Selected buddy: {{name}}",
+    "exploreTitle": "Explore stories",
+    "exploreDescription": "Discover songs, rhymes, and magical adventures tailored for little listeners.",
+    "connectTitle": "Connect your toy",
+    "connectDescription": "Pair your plush friend to unlock screen-free hugs and offline playback.",
+    "settingsTitle": "Customize experience",
+    "settingsDescription": "Change language, manage parental controls, and update content anytime.",
+    "startExploring": "Start exploring",
+    "changeLanguage": "Change language"
+  },
+  "common": {
+    "back": "Go back"
+  }
+}
